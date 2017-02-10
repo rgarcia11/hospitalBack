@@ -1,0 +1,32 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                       controllers.Application.index()
+
+########################################################################################################################
+#
+#                                               ###    ########  ####
+#                                              ## ##   ##     ##  ##
+#                                             ##   ##  ##     ##  ##
+#                                            ##     ## ########   ##
+#                                            ######### ##         ##
+#                                            ##     ## ##         ##
+#                                            ##     ## ##        ####
+#
+########################################################################################################################
+
+#########################################
+# Hospital
+#########################################
+
+POST        /hospital                 controllers.HospitalController.create()
+GET         /hospital                 controllers.HospitalController.listAll()
+GET         /hospital/:id             controllers.HospitalController.findById(id:Long)
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file           controllers.Assets.versioned(path="/public", file: Asset)
