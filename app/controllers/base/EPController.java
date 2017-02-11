@@ -3,7 +3,10 @@ import com.avaje.ebean.Model;
 import com.avaje.ebean.Query;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import models.HistoriaClinica;
 import models.Hospital;
+import models.Medico;
+import models.Paciente;
 import org.jongo.Jongo;
 import org.jongo.MongoCursor;
 import play.Application;
@@ -33,7 +36,9 @@ public class EPController extends Controller {
      * Creen una linea por cada nueva tabla (objeto) que se vaya a manejar
      */
     protected static final EPCrudService<Hospital> hospitalCrud = new EPCrudService<>("hospitales", Hospital.class);
-    protected static final EPCrudService<Hospital> medicosCrud = new EPCrudService<>("medicos", Hospital.class);
+    protected static final EPCrudService<Medico> medicosCrud = new EPCrudService<>("medicos", Medico.class);
+    protected static final EPCrudService<Paciente> pacientesCrud = new EPCrudService<>("pacientes", Paciente.class);
+    protected static final EPCrudService<HistoriaClinica> historiaClinicaCrud = new EPCrudService<>("historiaClinica", HistoriaClinica.class);
 
     /**
      * Turns request body into an object of the class clazz

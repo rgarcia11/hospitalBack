@@ -79,7 +79,7 @@ public class EPCrudService<T extends IdObject> {
      * @return Object found or null
      */
     @Nullable
-    public T findById(String id) throws Exception{
+    public T findById(String id) {
         return collection().find(EPJson.object("id",id).toString()).as(clazz).next();
     }
 
