@@ -10,8 +10,11 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   "org.avaje" % "ebean" % "2.7.3",
+  "org.jongo" % "jongo" % "1.3.0",
   "org.mongodb" % "bson" % "3.4.2",
-    javaWs
+  "uk.co.panaxiom" %% "play-jongo" % "1.0.1-jongo1.2",
+  "org.mongodb" % "mongo-java-driver" % "3.4.2",
+  javaWs
 )
 
 // Play provides two styles of routers, one expects its actions to be injected, the

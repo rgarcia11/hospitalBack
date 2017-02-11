@@ -12,13 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * This class eases working with Json by with a simple convention for key, value pairs.
- * Key, values are expected as an object array, in this way:
- * <p>k1, v1, ...., kn, vn
- * <p>
- * Created by Jason Oviedo on 18/01/2016.
- */
+
 public class EPJson {
     /**
      * Equivalent to {@link #object(Object...) object(...).toString()}

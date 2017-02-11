@@ -3,18 +3,33 @@ package controllers.base;
 
 //import org.jongo.MongoCursor;
 import com.avaje.ebean.Model;
+import com.avaje.ebean.Query;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import models.Hospital;
+import org.jongo.Jongo;
+import org.jongo.MongoCursor;
+import play.Application;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import util.EPJson;
 import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by felipeplazas on 2/9/17.
  */
 public class EPController extends Controller {
+
+    /**
+     * Creen una linea por cada nueva tabla (y objeto) que se vaya a manejar
+     */
+    protected static final EPCrudService<Hospital> hospitalCrud = new EPCrudService<>("hospitales", Hospital.class);
+    protected static final EPCrudService<Hospital> medicosCrud = new EPCrudService<>("medicos", Hospital.class);
 
     protected static final String CONTENT_TYPE = "application/json; charset=utf-8";
 
@@ -40,21 +55,8 @@ public class EPController extends Controller {
         response().setContentType(CONTENT_TYPE);
         String m = message != null ? message : "Request cannot be processed";
         int i = errorCode != null ? errorCode : 400;
-        return status(i, EPJson.object("message", m, "code", errorCode, "error", m));
+        return status(i, EPJson.object("message", m, "code", errorCode));
     }
-
-//    protected static Result ok(Iterable<?> list) {
-//        Iterable<?> toWrite = list == null ? new ArrayList() : list;
-//        response().setContentType(CONTENT_TYPE);
-//        Status res = ok(Json.prettyPrint(Json.toJson(toWrite)));
-//        if (toWrite instanceof MongoCursor)
-//            try {
-//                ((MongoCursor) toWrite).close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        return res;
-//    }
 
     protected static Result success(String message) {
         response().setContentType(CONTENT_TYPE);
@@ -66,18 +68,17 @@ public class EPController extends Controller {
         return object != null ? ok(Json.prettyPrint(Json.toJson(object))) : notFound();
     }
 
-    protected static <T> List<T> findAll(Class<T> clazz){
-        return new Model.Finder<Long, T>(clazz).all();
-    }
 
-    /**
-     * Finds an Object of the given class and with the given id.
-     * @param clazz
-     * @param id
-     * @param <T>
-     * @return
-     */
-    protected static <T> T findById(Class<T> clazz, Long id){
-        return new Model.Finder<Long, T>(clazz).byId(id);
+    protected static Result ok(Iterable<?> list) {
+        Iterable<?> toWrite = list == null ? new ArrayList<>() : list;
+        response().setContentType(CONTENT_TYPE);
+        Status res = ok(Json.prettyPrint(Json.toJson(toWrite)));
+        if (toWrite instanceof MongoCursor)
+            try {
+                ((MongoCursor) toWrite).close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        return res;
     }
 }

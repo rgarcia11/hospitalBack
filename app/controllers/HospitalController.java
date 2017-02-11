@@ -7,32 +7,57 @@ package controllers;
 import com.avaje.ebean.Model;
 import controllers.base.EPController;
 import models.Hospital;
+import org.jongo.Jongo;
 import play.mvc.Result;
+import scala.concurrent.java8.FuturesConvertersImpl;
+import uk.co.panaxiom.playjongo.PlayJongo;
+import util.EPJson;
+
 import java.util.List;
 
 public class HospitalController extends EPController {
 
     public Result create() {
-        //Turns the request body into the given class file
         Hospital hospital = bodyAs(Hospital.class);
-        //Saved the object into the DB
-        hospital.save();
-        //Returns a 200 response with the object hospital serialized.
+        hospitalCrud.save(hospital);
         return ok(hospital);
     }
 
+    /**
+     * Finds all the hospitals
+     * @return OK 200 with a list that may be empty if there are no hospitals.
+     */
     public Result listAll() {
-        //Finds all the hospitals
-        List<Hospital> hospitals = findAll(Hospital.class);
+        Iterable<Hospital> hospitals = hospitalCrud.collection().find().limit(100).as(Hospital.class);
         //Return a 200 response with all the hospitals serialized.
         return ok(hospitals);
     }
 
-    public Result findById(Long id) {
-        //Finds a hospital with the given id
-        Hospital hospital = findById(Hospital.class, id);
+    /**
+     * Find a hospital with the given id
+     * @param id
+     * @return OK 200 if Hospital exists, 400 ERROR if it doesn't
+     */
+    public Result findById(String id) {
+        Hospital hospital = null;
+        try {
+            hospital = hospitalCrud.findById(id);
+        } catch (Exception e) {
+            return error("Object does not exist", 400);
+        }
         return ok(hospital);
     }
 
+    /**
+     * Finds all the hospitals that match the given name.
+     * @param name
+     * @return 200 OK response with a list that may be empty if there are no matches.
+     */
+    public Result findByName(String name) {
+        //Finds a hospital with the given id
+        String query = EPJson.object("name", name).toString();
+        Iterable<Hospital> hospitals = hospitalCrud.collection().find(query).limit(100).as(Hospital.class);
+        return ok(hospitals);
+    }
 
 }

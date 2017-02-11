@@ -21,9 +21,10 @@ GET         /                       controllers.Application.index()
 # Hospital
 #########################################
 
-POST        /hospital                 controllers.HospitalController.create()
-GET         /hospital                 controllers.HospitalController.listAll()
-GET         /hospital/:id             controllers.HospitalController.findById(id:Long)
+POST        /hospital                          controllers.HospitalController.create()
+GET         /hospital                          controllers.HospitalController.listAll()
+GET         /hospital/:id                      controllers.HospitalController.findById(id:String)
+GET         /hospital/name/:name               controllers.HospitalController.findByName(name:String)
 
 
 
