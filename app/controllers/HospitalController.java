@@ -4,19 +4,17 @@ package controllers;
  * Created by felipeplazas on 2/9/17.
  */
 
-import com.avaje.ebean.Model;
 import controllers.base.EPController;
 import models.Hospital;
-import org.jongo.Jongo;
 import play.mvc.Result;
-import scala.concurrent.java8.FuturesConvertersImpl;
-import uk.co.panaxiom.playjongo.PlayJongo;
 import util.EPJson;
-
-import java.util.List;
 
 public class HospitalController extends EPController {
 
+    /**
+     * Creates a hospital, we assume the request is done properly (only we can create hospitals)
+     * @return created hospital object
+     */
     public Result create() {
         Hospital hospital = bodyAs(Hospital.class);
         hospitalCrud.save(hospital);
@@ -24,7 +22,7 @@ public class HospitalController extends EPController {
     }
 
     /**
-     * Finds all the hospitals
+     * Finds all the (first 100) hospitals
      * @return OK 200 with a list that may be empty if there are no hospitals.
      */
     public Result listAll() {
@@ -49,7 +47,7 @@ public class HospitalController extends EPController {
     }
 
     /**
-     * Finds all the hospitals that match the given name.
+     * Finds all the (first 100) hospitals that match the given name.
      * @param name
      * @return 200 OK response with a list that may be empty if there are no matches.
      */
