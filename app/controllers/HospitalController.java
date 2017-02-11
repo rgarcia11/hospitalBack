@@ -52,7 +52,6 @@ public class HospitalController extends EPController {
      * @return 200 OK response with a list that may be empty if there are no matches.
      */
     public Result findByName(String name) {
-        //Finds a hospital with the given id
         String query = EPJson.object("name", name).toString();
         Iterable<Hospital> hospitals = hospitalCrud.collection().find(query).limit(100).as(Hospital.class);
         return ok(hospitals);

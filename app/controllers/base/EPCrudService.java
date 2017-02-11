@@ -43,7 +43,6 @@ public class EPCrudService<T extends IdObject> {
 
     /**
      * Saves an object to DB as a new document.
-     *
      * @param object Object to save
      * @return The object
      */
@@ -61,7 +60,6 @@ public class EPCrudService<T extends IdObject> {
     /**
      * Retrieves an object with DB by its id. Method is guaranteed to return
      * an object or fail if it cannot be found
-     *
      * @param id Id to look for
      * @return The object.
      * @throws if object cannot be found
@@ -103,13 +101,11 @@ public class EPCrudService<T extends IdObject> {
 
     public T update(String id, T object) {
         object.setId(id);
-
         WriteResult res = collection().update(new ObjectId(id)).with(object);
         if (res.getN() > 0)
             return object;
         throw new RuntimeException("Entity " + clazz.getSimpleName() + " cannot be updated :(");
     }
-
     /**
      * Sets the object defined by id as deleted
      *

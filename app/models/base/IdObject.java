@@ -1,13 +1,14 @@
 package models.base;
 
+/**
+ * Created by felipeplazas on 2/10/17.
+ */
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
-/**
- * Created by felipeplazas on 2/10/17.
- */
+
 @JsonInclude(JsonInclude.Include.ALWAYS)
 public class IdObject {
 

@@ -18,6 +18,7 @@ public class Hospital extends IdObject {
 
     private String name;
     private String address;
+    private Medico medico;
 
     public String getName() {
         return name;
@@ -33,5 +34,13 @@ public class Hospital extends IdObject {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 }
