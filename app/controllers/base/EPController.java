@@ -3,10 +3,7 @@ import com.avaje.ebean.Model;
 import com.avaje.ebean.Query;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
-import models.HistoriaClinica;
-import models.Hospital;
-import models.Medico;
-import models.Paciente;
+import models.*;
 import org.jongo.Jongo;
 import org.jongo.MongoCursor;
 import play.Application;
@@ -38,7 +35,7 @@ public class EPController extends Controller {
     protected static final EPCrudService<Hospital> hospitalCrud = new EPCrudService<>("hospitales", Hospital.class);
     protected static final EPCrudService<Medico> medicosCrud = new EPCrudService<>("medicos", Medico.class);
     protected static final EPCrudService<Paciente> pacientesCrud = new EPCrudService<>("pacientes", Paciente.class);
-    protected static final EPCrudService<HistoriaClinica> historiaClinicaCrud = new EPCrudService<>("historiaClinica", HistoriaClinica.class);
+    protected static final EPCrudService<Medicion> medicionCrud = new EPCrudService<>("mediciones", Medicion.class);
 
     /**
      * Turns request body into an object of the class clazz
