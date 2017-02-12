@@ -18,4 +18,8 @@ public class Application extends Controller {
         return ok(new File("public/main/index.html"), true);
     }
 
+    public Result loderIOApiKey(){
+        return Results.ok("loaderio-076a9fb09097659a1b6d846cba157944");
+    }
+
 }
