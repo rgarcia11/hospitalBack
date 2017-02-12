@@ -10,6 +10,7 @@ public class Paciente extends IdObject {
     private String name;
     private String address;
     private HistoriaClinica historiaClinica;
+    private Marcapasos marcapasos;
 
     public HistoriaClinica getHistoriaClinica() {
         return historiaClinica;
@@ -35,4 +36,11 @@ public class Paciente extends IdObject {
         this.address = address;
     }
 
+    public Marcapasos getMarcapasos() {
+        return marcapasos;
+    }
+
+    public void setMarcapasos(Marcapasos marcapasos) {
+        this.marcapasos = marcapasos;
+    }
 }
