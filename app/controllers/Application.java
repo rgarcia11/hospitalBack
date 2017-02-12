@@ -7,13 +7,15 @@ import play.mvc.*;
 
 import views.html.*;
 
+import java.io.File;
+
 /**
  * Created by felipeplazas on 2/9/17.
  */
 public class Application extends Controller {
 
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(new File("public/main/index.html"), true);
     }
 
 }

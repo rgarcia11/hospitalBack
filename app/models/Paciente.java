@@ -34,4 +34,5 @@ public class Paciente extends IdObject {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }
