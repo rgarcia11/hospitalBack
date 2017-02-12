@@ -3,17 +3,47 @@ package models;
 import models.base.IdObject;
 
 /**
- * Created by felipeplazas on 2/10/17.
+ *
  */
-public class Medico extends IdObject {
+public class Marcapasos extends IdObject {
 
-    private String name;
+    private double amplitud;
 
-    public String getName() {
-        return name;
+    private double duracion;
+
+    private double sensibilidad;
+
+    private String modo;
+
+    public double getAmplitud() {
+        return amplitud;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAmplitud(double amplitud) {
+        this.amplitud = amplitud;
+    }
+
+    public double getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(double duracion) {
+        this.duracion = duracion;
+    }
+
+    public double getSensibilidad() {
+        return sensibilidad;
+    }
+
+    public void setSensibilidad(double sensibilidad) {
+        this.sensibilidad = sensibilidad;
+    }
+
+    public String getModo() {
+        return modo;
+    }
+
+    public void setModo(String modo) {
+        this.modo = modo;
     }
 }

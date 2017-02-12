@@ -1,33 +1,52 @@
 package controllers;
 
 import controllers.base.EPController;
-import models.ConcejoAutomatico;
-import models.HistoriaClinica;
-import models.Medicion;
-import models.Paciente;
+import models.*;
 import play.mvc.Result;
 
 import java.util.ArrayList;
 
 /**
- * Created by felipeplazas on 2/11/17.
+ * kjhfkjhfkhkhfdkhkdh
  */
-public class MedicionController extends EPController {
+public class MarcapasosController extends EPController {
 
-
-    public Result procesarMedicion(){
-        Medicion medicion = bodyAs(Medicion.class);
-        Paciente paciente = pacientesCrud.findById( medicion.getIdPaciente() );
-
-        if (paciente.getHistoriaClinica() == null) {
-            paciente.setHistoriaClinica( new HistoriaClinica() );
-            paciente.getHistoriaClinica().setMediciones( new ArrayList<Medicion>() );
-            paciente.getHistoriaClinica().setConcejosAutomaticos( new ArrayList<ConcejoAutomatico>() );
-        }
-
-        paciente.getHistoriaClinica().getMediciones().add( medicion );
-        pacientesCrud.save( paciente );
-        medicionCrud.save( medicion );
-        return ok( medicion );
+    /**
+     * Creates a marcapasos, we assume the request is done properly
+     * @return created marcapasos object
+     */
+    public Result create() {
+        Marcapasos marcapasos = bodyAs(Marcapasos.class);
+        marcapasosCrud.save(marcapasos);
+        return ok(marcapasos);
     }
+
+
+    /**
+     * Finds all the (first 100) marcapasos
+     * @return OK 200 with a list that may be empty if there are no marcapasos.
+     */
+    public Result listAll() {
+        Iterable<Marcapasos> marcapasos = marcapasosCrud.collection().find().limit(100).as(Marcapasos.class);
+        //Return a 200 response with all the hospitals serialized.
+        return ok(marcapasos);
+    }
+
+    /**
+     * Find a marcapasos with the given id
+     * @param id
+     * @return OK 200 if Marcapasos exists, 400 ERROR if it doesn't
+     */
+    public Result findById(String id) {
+        Marcapasos marcapasos = null;
+        try {
+            marcapasos = marcapasosCrud.findById(id);
+        } catch (Exception e) {
+            return error("Object does not exist", 400);
+        }
+        return ok(marcapasos);
+    }
+
+
+
 }

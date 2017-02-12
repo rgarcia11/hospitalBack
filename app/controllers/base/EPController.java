@@ -36,6 +36,8 @@ public class EPController extends Controller {
     protected static final EPCrudService<Medico> medicosCrud = new EPCrudService<>("medicos", Medico.class);
     protected static final EPCrudService<Paciente> pacientesCrud = new EPCrudService<>("pacientes", Paciente.class);
     protected static final EPCrudService<Medicion> medicionCrud = new EPCrudService<>("mediciones", Medicion.class);
+    protected static final EPCrudService<Marcapasos> marcapasosCrud = new EPCrudService<>("marcapasos", Marcapasos.class);
+
 
     /**
      * Turns request body into an object of the class clazz
