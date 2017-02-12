@@ -58,29 +58,13 @@ public class EPCrudService<T extends IdObject> {
     }
 
     /**
-     * Retrieves an object with DB by its id. Method is guaranteed to return
-     * an object or fail if it cannot be found
-     * @param id Id to look for
-     * @return The object.
-     * @throws if object cannot be found
-     */
-    @Nonnull
-    public T getById(String id) throws Exception {
-        T res = findById(id);
-        if (res == null)
-            throw new Exception("Entity " + clazz.getSimpleName() + " can't be found by id: " + id);
-        return res;
-    }
-
-    /**
      * Tries to retrieve an object with DB by its Id
-     *
      * @param id Id to look for
-     * @return Object found or null
+     * @return Object found or null if not found
      */
     @Nullable
     public T findById(String id) {
-        return collection().find(EPJson.object("id",id).toString()).as(clazz).next();
+        return collection().findOne( EPJson.object("id", id).toString() ).as(clazz);
     }
 
     /**

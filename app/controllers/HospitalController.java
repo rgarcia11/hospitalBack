@@ -17,7 +17,7 @@ public class HospitalController extends EPController {
      */
     public Result create() {
         Hospital hospital = bodyAs(Hospital.class);
-        hospitalCrud.save(hospital);
+        hospitalesCrud.save(hospital);
         return ok(hospital);
     }
 
@@ -26,7 +26,7 @@ public class HospitalController extends EPController {
      * @return OK 200 with a list that may be empty if there are no hospitals.
      */
     public Result listAll() {
-        Iterable<Hospital> hospitals = hospitalCrud.collection().find().limit(100).as(Hospital.class);
+        Iterable<Hospital> hospitals = hospitalesCrud.collection().find().limit(100).as(Hospital.class);
         //Return a 200 response with all the hospitals serialized.
         return ok(hospitals);
     }
@@ -38,11 +38,9 @@ public class HospitalController extends EPController {
      */
     public Result findById(String id) {
         Hospital hospital = null;
-        try {
-            hospital = hospitalCrud.findById(id);
-        } catch (Exception e) {
+        hospital = hospitalesCrud.findById(id);
+        if (hospital == null)
             return error("Object does not exist", 400);
-        }
         return ok(hospital);
     }
 
@@ -53,7 +51,7 @@ public class HospitalController extends EPController {
      */
     public Result findByName(String name) {
         String query = EPJson.object("name", name).toString();
-        Iterable<Hospital> hospitals = hospitalCrud.collection().find(query).limit(100).as(Hospital.class);
+        Iterable<Hospital> hospitals = hospitalesCrud.collection().find(query).limit(100).as(Hospital.class);
         return ok(hospitals);
     }
 
