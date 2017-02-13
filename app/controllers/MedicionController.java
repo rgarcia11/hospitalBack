@@ -7,6 +7,9 @@ import models.Medicion;
 import models.Paciente;
 import play.mvc.Result;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.ArrayList;
 
@@ -15,24 +18,32 @@ import java.util.ArrayList;
  */
 public class MedicionController extends EPController {
 
-    private final static int BUFFER_SIZE = 1000;
+    private final static int BUFFER_SIZE = 1000000;
     private static Medicion [] medsBuffer = new Medicion[BUFFER_SIZE];
     private static int bufferIndex = 0;
+    private static Map<String, List<Medicion>> buffer = new HashMap<>();
 
     public Result procesarMedicion() {
         Medicion medicion = bodyAs(Medicion.class);
         CompletableFuture.runAsync(() -> {
-            Paciente paciente = pacientesCrud.findById(medicion.getIdPaciente());
-            if (paciente == null) {
-                //This shouldn't happen, a prerequisite for a mobile device to send measurements is to be logged in.
-                throw new RuntimeException("ERROR, a measurement came with a non-existing patiendId.");
-            }
-            if (paciente.getHistoriaClinica() == null) {
-                paciente.setHistoriaClinica(new HistoriaClinica());
-                paciente.getHistoriaClinica().setMediciones(new ArrayList<Medicion>());
-                paciente.getHistoriaClinica().setConcejosAutomaticos(new ArrayList<ConcejoAutomatico>());
-            }
-            paciente.getHistoriaClinica().getMediciones().add(medicion);
+//            Paciente paciente = null;
+//            if ( buffer.containsKey(medicion.getIdPaciente()) ){
+//                paciente = buffer.get(medicion.getIdPaciente());
+//            }
+//            else{
+//                paciente = pacientesCrud.findById(medicion.getIdPaciente())
+//            }
+//            ;
+//            if (paciente == null) {
+//                //This shouldn't happen, a prerequisite for a mobile device to send measurements is to be logged in.
+//                throw new RuntimeException("ERROR, a measurement came with a non-existing patiendId.");
+//            }
+//            if (paciente.getHistoriaClinica() == null) {
+//                paciente.setHistoriaClinica(new HistoriaClinica());
+//                paciente.getHistoriaClinica().setMediciones(new ArrayList<Medicion>());
+//                paciente.getHistoriaClinica().setConcejosAutomaticos(new ArrayList<ConcejoAutomatico>());
+//            }
+//            paciente.getHistoriaClinica().getMediciones().add(medicion);
 
             medsBuffer[bufferIndex++] = medicion;
             if ( bufferIndex == BUFFER_SIZE ) {
