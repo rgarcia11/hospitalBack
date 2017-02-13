@@ -19,14 +19,15 @@ public class MedicionController extends EPController {
     private static int bufferIndex = 0;
 
     static{
-        FiniteDuration duration = Duration.create((long) 10, TimeUnit.SECONDS);
-        FiniteDuration interval = Duration.create((long) 2, TimeUnit.MINUTES);
-        play.libs.Akka.system().scheduler().schedule(
-                duration, interval,
-                () -> {
-                    insertMediciones();
-                }, play.libs.Akka.system().dispatcher()
-        );
+//        Commented in order to save heroku free hours
+//        FiniteDuration duration = Duration.create((long) 10, TimeUnit.SECONDS);
+//        FiniteDuration interval = Duration.create((long) 2, TimeUnit.MINUTES);
+//        play.libs.Akka.system().scheduler().schedule(
+//                duration, interval,
+//                () -> {
+//                    insertMediciones();
+//                }, play.libs.Akka.system().dispatcher()
+//        );
     }
 
     public Result procesarMedicion() {
@@ -45,7 +46,6 @@ public class MedicionController extends EPController {
             medicionesCrud.collection().insert( Arrays.copyOf(medsBuffer, bufferIndex) );
         else
             medicionesCrud.collection().insert( medsBuffer );
-        Arrays.fill(medsBuffer, null);
         bufferIndex = 0;
     }
 
