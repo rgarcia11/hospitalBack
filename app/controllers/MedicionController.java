@@ -16,6 +16,7 @@ public class MedicionController extends EPController {
 
     private final static int BUFFER_SIZE = 179900;
     private static Medicion [] medsBuffer = new Medicion[BUFFER_SIZE];
+    private static String medsBuffer2 = "[";
     private static int bufferIndex = 0;
 
     static{
@@ -32,21 +33,33 @@ public class MedicionController extends EPController {
 
     public Result procesarMedicion() {
         Medicion medicion = bodyAs(Medicion.class);
-        medsBuffer[bufferIndex++] = medicion;
+        medsBuffer2 += request().body().asJson().toString() + ",";
+        bufferIndex++;
         if ( bufferIndex == BUFFER_SIZE ) {
             CompletableFuture.runAsync(() -> {
                insertMediciones();
             });
         }
+//        medsBuffer[bufferIndex++] = medicion;
+//        if ( bufferIndex == BUFFER_SIZE ) {
+//            CompletableFuture.runAsync(() -> {
+//               insertMediciones();
+//            });
+//        }
         return ok();
     }
 
     private synchronized static void insertMediciones(){
-        if (bufferIndex != BUFFER_SIZE && bufferIndex != 0)
-            medicionesCrud.collection().insert( Arrays.copyOf(medsBuffer, bufferIndex) );
-        else if (bufferIndex == BUFFER_SIZE)
-            medicionesCrud.collection().insert( medsBuffer );
+        if ( bufferIndex != 0 ) {
+            medsBuffer2 = medsBuffer2.substring(0, medsBuffer2.length()-1) + "]";
+            medicionesCrud.collection().insert(medsBuffer2);
+        }
         bufferIndex = 0;
+//        if (bufferIndex != BUFFER_SIZE && bufferIndex != 0)
+//            medicionesCrud.collection().insert( Arrays.copyOf(medsBuffer, bufferIndex) );
+//        else if (bufferIndex == BUFFER_SIZE)
+//            medicionesCrud.collection().insert( medsBuffer );
+//        bufferIndex = 0;
     }
 
 }
