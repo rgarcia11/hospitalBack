@@ -1,33 +1,23 @@
 package controllers;
 
-import akka.actor.ActorSystem;
 import controllers.base.EPController;
 import models.ConcejoAutomatico;
 import models.HistoriaClinica;
 import models.Medicion;
 import models.Paciente;
 import play.mvc.Result;
-import play.mvc.Results;
-import scala.concurrent.ExecutionContextExecutor;
-import akka.actor.ActorSystem;
-import javax.inject.*;
-import play.*;
-import play.mvc.*;
-import java.util.concurrent.Executor;
+
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
-import scala.concurrent.duration.Duration;
-import scala.concurrent.ExecutionContextExecutor;
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by felipeplazas on 2/11/17.
  */
 public class MedicionController extends EPController {
+
+    private final static int BUFFER_SIZE = 1000;
+    private static Medicion [] medsBuffer = new Medicion[BUFFER_SIZE];
+    private static int bufferIndex = 0;
 
     public Result procesarMedicion() {
         Medicion medicion = bodyAs(Medicion.class);
@@ -44,9 +34,14 @@ public class MedicionController extends EPController {
             }
             paciente.getHistoriaClinica().getMediciones().add(medicion);
 
-            medicionesCrud.save(medicion);
-            historiaClinicaCrud.save(paciente.getHistoriaClinica());
-            pacientesCrud.save(paciente);
+            medsBuffer[bufferIndex++] = medicion;
+            if ( bufferIndex == BUFFER_SIZE ) {
+                medicionesCrud.collection().insert( medsBuffer );
+//                medicionesCrud.save(medicion);
+//                historiaClinicaCrud.save(paciente.getHistoriaClinica());
+//                pacientesCrud.save(paciente);
+                bufferIndex = 0;
+            }
         });
         return ok();
     }
