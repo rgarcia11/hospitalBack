@@ -14,7 +14,7 @@ public class Medicion extends IdObject {
     private String idPaciente;
     private long latitude;
     private long longitude;
-    private Date fecha;
+    private long openTimestamp;
 
     public int getTipoMedicion() {
         return tipoMedicion;
@@ -56,8 +56,11 @@ public class Medicion extends IdObject {
         this.longitude = longitude;
     }
 
-    public Date getFecha() {return fecha;}
+    public long getOpenTimestamp() {
+        return openTimestamp;
+    }
 
-    public void setFecha(Date fecha) {this.fecha = fecha;
+    public void setOpenTimestamp(long openTimestamp) {
+        this.openTimestamp = openTimestamp;
     }
 }
