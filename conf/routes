@@ -45,7 +45,7 @@ GET         /marcapasos                          controllers.MarcapasosControlle
 GET         /marcapasos/:id                      controllers.MarcapasosController.findById(id:String)
 
 #########################################
-# Paciente
+# Paciente :)
 #########################################
 
 POST        /pacientes                          controllers.PacienteController.create()
