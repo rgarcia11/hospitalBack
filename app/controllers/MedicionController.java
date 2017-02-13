@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class MedicionController extends EPController {
 
-    private final static int BUFFER_SIZE = 17990;
+    private final static int BUFFER_SIZE = 879900;
     private static Medicion [] medsBuffer = new Medicion[BUFFER_SIZE];
     private static int bufferIndex = 0;
 
     static{
 //        Commented in order to save heroku free hours
         FiniteDuration duration = Duration.create((long) 10, TimeUnit.SECONDS);
-        FiniteDuration interval = Duration.create((long) 2, TimeUnit.MINUTES);
+        FiniteDuration interval = Duration.create((long) 5, TimeUnit.MINUTES);
         play.libs.Akka.system().scheduler().schedule(
                 duration, interval,
                 () -> {
