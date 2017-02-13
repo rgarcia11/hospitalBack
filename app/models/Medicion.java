@@ -2,6 +2,8 @@ package models;
 
 import models.base.IdObject;
 
+import java.util.Date;
+
 /**
  * Created by felipeplazas on 2/11/17.
  */
@@ -12,6 +14,7 @@ public class Medicion extends IdObject {
     private String idPaciente;
     private long latitude;
     private long longitude;
+    private Date fecha;
 
     public int getTipoMedicion() {
         return tipoMedicion;
@@ -51,5 +54,10 @@ public class Medicion extends IdObject {
 
     public void setLongitude(long longitude) {
         this.longitude = longitude;
+    }
+
+    public Date getFecha() {return fecha;}
+
+    public void setFecha(Date fecha) {this.fecha = fecha;
     }
 }
