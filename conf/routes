@@ -43,6 +43,8 @@ GET         /hospital/name/:name               controllers.HospitalController.fi
 POST        /marcapasos                          controllers.MarcapasosController.create()
 GET         /marcapasos                          controllers.MarcapasosController.listAll()
 GET         /marcapasos/:id                      controllers.MarcapasosController.findById(id:String)
+PUT         /marcapasos/:id                      controllers.MarcapasosController.update(id:String)
+
 
 #########################################
 # Paciente

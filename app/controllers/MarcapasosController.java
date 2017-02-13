@@ -21,6 +21,16 @@ public class MarcapasosController extends EPController {
         return ok(marcapasos);
     }
 
+    /**
+     * Updates a marcapasos, we assume the request is done properly
+     * @return updated marcapasos object
+     */
+    public Result update(String id) {
+        Marcapasos marcapasos = bodyAs(Marcapasos.class);
+        marcapasosCrud.update(id, marcapasos);
+        return ok(marcapasos);
+    }
+
 
     /**
      * Finds all the (first 100) marcapasos
