@@ -45,12 +45,13 @@ GET         /marcapasos                          controllers.MarcapasosControlle
 GET         /marcapasos/:id                      controllers.MarcapasosController.findById(id:String)
 
 #########################################
-# Paciente :)
+# Paciente
 #########################################
 
 POST        /pacientes                          controllers.PacienteController.create()
 GET         /pacientes                          controllers.PacienteController.listAll()
 GET         /pacientes/:id                      controllers.PacienteController.findById(id:String)
+GET         /pacientes/historia/:id             controllers.PacienteController.findHistoriaById(id:String)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.base.EPController;
+import models.HistoriaClinica;
 import models.Marcapasos;
 import models.Paciente;
 import play.mvc.Result;
@@ -44,6 +45,24 @@ public class PacienteController extends EPController {
             return error("Object does not exist", 400);
         }
         return ok(paciente);
+    }
+
+    /**
+     * Retorna la historia clinica de un paciente dado su id
+     * @param id
+     * @return OK 200 if Paciente exists, 400 ERROR if it doesn't
+     */
+    public Result findHistoriaById(String id) {
+        Paciente paciente = null;
+        HistoriaClinica historia = null;
+        try {
+            paciente = pacientesCrud.findById(id);
+            historia = paciente.getHistoriaClinica();
+
+        } catch (Exception e) {
+            return error("Object does not exist", 400);
+        }
+        return ok(historia);
     }
 
 
