@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class MedicionController extends EPController {
 
-    private final static int BUFFER_SIZE = 1000000;
+    private final static int BUFFER_SIZE = 36000;
     private static Medicion [] medsBuffer = new Medicion[BUFFER_SIZE];
     private static int bufferIndex = 0;
     private static Map<String, List<Medicion>> buffer = new HashMap<>();
