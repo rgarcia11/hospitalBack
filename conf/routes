@@ -55,6 +55,30 @@ GET         /pacientes                          controllers.PacienteController.l
 GET         /pacientes/:id                      controllers.PacienteController.findById(id:String)
 GET         /pacientes/historia/:id             controllers.PacienteController.findHistoriaById(id:String)
 
+#########################################
+# Medicos
+#########################################
+
+POST        /medicos                            controllers.MedicoController.create()
+GET         /medicos                            controllers.MedicoController.listAll()
+GET         /medicos/id/:id                     controllers.MedicoController.findById(id:String)
+GET         /medicos/name/:name                 controllers.MedicoController.findByName(name:String)
+GET         /medicos/registro/:register         controllers.MedicoController.findByRegistroMedico(register:Integer)
+GET         /medicos/pacientes/:id              controllers.MedicoController.findPacientes(id:String)
+DELETE      /medicos/:id                        controllers.MedicoController.deletePaciente(id:String)
+
+#########################################
+# Medicos Generales
+#########################################
+
+
+
+#########################################
+# Medicos Especialistas
+#########################################
+
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file           controllers.Assets.versioned(path="/public", file: Asset)
