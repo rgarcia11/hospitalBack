@@ -40,6 +40,7 @@ public class EPController extends Controller {
     protected static final EPCrudService<Medicion> medicionesCrud = new EPCrudService<>("mediciones", Medicion.class);
     protected static final EPCrudService<Marcapasos> marcapasosCrud = new EPCrudService<>("marcapasos", Marcapasos.class);
     protected static final EPCrudService<HistoriaClinica> historiaClinicaCrud = new EPCrudService<>("historiaClinica", HistoriaClinica.class);
+    protected static final EPCrudService<Emergencia> emergenciasCrud = new EPCrudService<>("emergencias", Emergencia.class);
 
 
     /**

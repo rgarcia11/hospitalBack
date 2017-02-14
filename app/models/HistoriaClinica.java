@@ -9,15 +9,15 @@ import java.util.List;
  */
 public class HistoriaClinica extends IdObject{
 
-    private List<Medicion> mediciones;
     private List<ConcejoAutomatico> concejosAutomaticos;
+    private List<Emergencia> emergencias;
 
-    public List<Medicion> getMediciones() {
-        return mediciones;
+    public List<Emergencia> getEmergencias() {
+        return emergencias;
     }
 
-    public void setMediciones(List<Medicion> mediciones) {
-        this.mediciones = mediciones;
+    public void setEmergencias(List<Emergencia> emergencias) {
+        this.emergencias = emergencias;
     }
 
     public List<ConcejoAutomatico> getConcejosAutomaticos() {

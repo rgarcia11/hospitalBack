@@ -19,7 +19,6 @@ public class MedicionController extends EPController {
     private static int bufferIndex = 0;
 
     static{
-//        Commented in order to save heroku free hours
         FiniteDuration duration = Duration.create((long) 10, TimeUnit.SECONDS);
         FiniteDuration interval = Duration.create((long) 5, TimeUnit.MINUTES);
         play.libs.Akka.system().scheduler().schedule(
@@ -34,9 +33,7 @@ public class MedicionController extends EPController {
         Medicion medicion = bodyAs(Medicion.class);
         medsBuffer[bufferIndex++] = medicion;
         if ( bufferIndex == BUFFER_SIZE ) {
-//            CompletableFuture.runAsync(() -> {
                insertMediciones();
-//            });
         }
         return ok();
     }

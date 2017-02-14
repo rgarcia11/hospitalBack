@@ -22,10 +22,11 @@
 GET         /                                  controllers.Application.index()
 
 #########################################
-# Medicion
+# Mediciones
 #########################################
 
 POST        /medicion                          controllers.MedicionController.procesarMedicion()
+POST        /emergencia                        controllers.EmergenciaController.procesarEmergencia()
 
 #########################################
 # Hospital

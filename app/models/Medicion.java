@@ -9,18 +9,22 @@ import java.util.Date;
  */
 public class Medicion extends IdObject {
 
-    private int tipoMedicion;
+    public enum TipoMedida{
+        CARDIACA, ARTERIAL, TEMPERATURA
+    }
+
+    private TipoMedida tipoMedicion;
     private long valorMedicion;
     private String idPaciente;
     private long latitude;
     private long longitude;
     private long openTimestamp;
 
-    public int getTipoMedicion() {
+    public TipoMedida getTipoMedicion() {
         return tipoMedicion;
     }
 
-    public void setTipoMedicion(int tipoMedicion) {
+    public void setTipoMedicion(TipoMedida tipoMedicion) {
         this.tipoMedicion = tipoMedicion;
     }
 
