@@ -34,9 +34,9 @@ public class MedicionController extends EPController {
         Medicion medicion = bodyAs(Medicion.class);
         medsBuffer[bufferIndex++] = medicion;
         if ( bufferIndex == BUFFER_SIZE ) {
-            CompletableFuture.runAsync(() -> {
+//            CompletableFuture.runAsync(() -> {
                insertMediciones();
-            });
+//            });
         }
         return ok();
     }
